@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Core.Events;
 using MongoOdataApi.Models;
 using MongoOdataApi.Settings;
+using System.Threading.Tasks;
 
 namespace MongoOdataApi.Controllers
 {
@@ -35,7 +36,14 @@ namespace MongoOdataApi.Controllers
         }
 
         [HttpGet]
-        [EnableQuery]
+        [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
         public IActionResult Get() => Ok(_pessoas.AsQueryable());
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Pessoa pessoa)
+        {
+            await _pessoas.InsertOneAsync(pessoa);
+            return Ok();
+        }
     }
 }

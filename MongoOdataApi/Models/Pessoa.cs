@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoOdataApi.Models
@@ -12,5 +13,7 @@ namespace MongoOdataApi.Models
         public string Nome { get; set; }
         [BsonElement("sobrenome")]
         public string Sobrenome { get; set; }
+        [BsonElement("dataNascimento")]
+        public DateTime? DataNascimento { get; set; }
     }
 }
